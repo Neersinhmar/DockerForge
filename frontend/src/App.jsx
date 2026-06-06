@@ -16,27 +16,27 @@ function App() {
     setResult(null);
     setError("");
 
-    try {
-      const res = await fetch("http://localhost:8000/generate-dockerfile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ repo_url: repoUrl }),
-      });
+   try {
+  const res = await fetch("/generate-dockerfile", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ repo_url: repoUrl }),
+  });
 
-      const data = await res.json();
+  const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.detail || data.error || "Backend error occurred.");
-      }
+  if (!res.ok) {
+    throw new Error(data.detail || data.error || "Backend error occurred.");
+  }
 
-      setResult(data);
-    } catch (err) {
-      setError(err.message || "Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
+  setResult(data);
+} catch (err) {
+  setError(err.message || "Something went wrong.");
+} finally {
+  setLoading(false);
+}
   };
 
   const copyDockerfile = async () => {
