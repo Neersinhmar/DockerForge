@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  dockerforge:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
